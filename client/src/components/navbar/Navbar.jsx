@@ -4,6 +4,7 @@ import MovieIcon from "@material-ui/icons/Movie";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   //the initial state is going to be false, dmth pa e bo scroll sbohet black.
@@ -20,9 +21,15 @@ const Navbar = () => {
       <div className="container">
         <div className="left">
           <MovieIcon />
-          <span className="hpg">Homepage</span>
+          <Link to='/' className='link'>
+          <span>HomePage</span>
+          </Link>
+          <Link to='/series' className='link'>
           <span>Series</span>
+          </Link>
+          <Link to='/movies' className='link'>
           <span>Movies</span>
+          </Link>
           <span>New and Popular</span>
           <span>My List</span>
         </div>
