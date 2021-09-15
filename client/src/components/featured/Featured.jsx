@@ -28,6 +28,7 @@ const Featured = ({type}) => {
             </div>)}
             <img width="100%" src={moviee} alt=""/>
             <div className="info">
+            <h1>The matrix</h1>
                 <span className="desc">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</span>
                 <div className="buttons">
                     <button className="play"> <PlayArrow/> <span>Play</span></button>

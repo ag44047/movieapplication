@@ -1,11 +1,15 @@
 import "./App.scss";
 import { Home } from "./pages/home/Home";
 import Register from "./pages/register/Register";
-import WatchPage from "./pages/watch/WatchPage";
+import {WatchPage} from "./pages/watch/WatchPage";
 import Login from "./pages/login/Login";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from 'axios' ;
 
 function App() {
+  const [lists, setLists] = useState([]); 
+
   const user = true;
   return (
     <Router>
