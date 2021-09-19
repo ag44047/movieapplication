@@ -91,6 +91,70 @@ namespace Persistence
                 }
             };
 
+
+
+            if (context.Lists.Any()) return;
+
+            var lists = new List<Listt>
+            {
+                new Listt
+                {
+                    listTitle = "blla blla",
+                    listType = "movie",
+                    listGenre = "comedy",
+                    content = new List<MovieListt>
+                    {
+                        new MovieListt
+                        {
+                            Movie= movies[0]
+                        }
+                    }
+                },
+            new Listt
+                {
+                    listTitle = "comedy movie blla blla",
+                    listType = "movie",
+                    listGenre = "comedy",
+                    content = new List<MovieListt>
+                    {
+                        new MovieListt
+                        {
+                            Movie= movies[1]
+                        }
+                    }
+
+                },
+            new Listt
+                {
+                    listTitle = "comedy movie blla blla 2",
+                    listType = "series",
+                    listGenre = "comedy",
+                    content = new List<MovieListt>
+                    {
+                        new MovieListt
+                        {
+                            Movie= movies[3]
+                        }
+                    }
+
+                },
+            new Listt
+                {
+                    listTitle = "action movie blla blla",
+                    listType = "movie",
+                    listGenre = "comedy",
+                    content = new List<MovieListt>
+                    {
+                        new MovieListt
+                        {
+                            Movie= movies[4]
+                        }
+                    }
+                }
+            };
+
+
+            await context.Lists.AddRangeAsync(lists);
             await context.Movies.AddRangeAsync(movies);
             await context.SaveChangesAsync();
         }

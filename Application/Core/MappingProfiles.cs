@@ -13,6 +13,7 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Movie, Movie>();
+            CreateMap<Listt, Listt>();
         }
     }
 }

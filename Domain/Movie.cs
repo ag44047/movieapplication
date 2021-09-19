@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -27,5 +28,7 @@ namespace Domain
         public string genre { get; set; }
 
         public bool isSeries { get; set; }
+
+        public ICollection<MovieListt> movielists { get; set; }
     }
 }
