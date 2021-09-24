@@ -15,17 +15,17 @@ namespace API.Controllers
        
 
         [HttpGet]
-        public async Task<ActionResult<List<Movie>>> GetMovies()
+        public async Task<IActionResult> GetMovies()
         {
-            return await Mediator.Send(new MovieList.Query());
+            return HandleResult(await Mediator.Send(new MovieList.Query()));
         }
 
 
 
         [HttpGet("{id}")] 
-        public async Task<ActionResult<Movie>> GetMovie(Guid id) {
-
-            return await Mediator.Send(new Details.Query{ Id = id}); ;
+        public async Task<IActionResult> GetMovie(Guid id) 
+        {
+         return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
 
 
@@ -33,7 +33,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMovie(Movie movie)
         {
-            return Ok(await Mediator.Send(new Create.Command { Movie = movie }));
+            return HandleResult(await Mediator.Send(new CreateMovie.Command { Movie = movie }));
         }
 
 
@@ -42,7 +42,7 @@ namespace API.Controllers
         public async Task<IActionResult> EditMovie(Guid id, Movie movie)
         {
             movie.Id = id;
-            return Ok(await Mediator.Send(new Edit.Command { Movie = movie }));
+            return HandleResult(await Mediator.Send(new EditMovie.Command { Movie = movie }));
         }
 
 
@@ -50,7 +50,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(Guid id)
         {
-            return Ok(await Mediator.Send(new Delete.Command { Id = id }));
+            return HandleResult(await Mediator.Send(new DeleteMovie.Command { Id = id }));
         }
     }
 

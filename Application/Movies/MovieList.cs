@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -13,11 +14,11 @@ namespace Application.Movies
 {
     public class MovieList
     {
-        public class Query : IRequest<List<Movie>>
+        public class Query : IRequest<Result<List<Movie>>>
         {
 
         }
-        public class Handler : IRequestHandler<Query, List<Movie>>
+        public class Handler : IRequestHandler<Query, Result<List<Movie>>>
         {
             private readonly DataContext _context;
 
@@ -26,9 +27,9 @@ namespace Application.Movies
                 _context = context;
             }
 
-            public async Task<List<Movie>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Movie>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Movies.ToListAsync();
+                return Result<List<Movie>>.Success(await _context.Movies.ToListAsync(cancellationToken));
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿
+using Application.Core;
 using AutoMapper;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 using System;
@@ -14,12 +16,19 @@ namespace Application.ListFeatures
 {
     public class Edit
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             public Listt Listt { get; set; }
         }
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Listt).SetValidator(new ListValidator());
 
-        public class Handler : IRequestHandler<Command>
+            }
+        }
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -30,14 +39,18 @@ namespace Application.ListFeatures
                 _mapper = mapper;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var list = await _context.Lists.FindAsync(request.Listt.Id);
 
-                _mapper.Map(request.Listt, list);
-                await _context.SaveChangesAsync();
+                if (list == null) return null;
 
-                return Unit.Value;
+                _mapper.Map(request.Listt, list);
+              var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to update the list");
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }

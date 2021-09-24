@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -13,12 +14,12 @@ namespace Application.ListFeatures
 {
   public  class ListOfLists
     {
-        public class Query : IRequest<List<Listt>>
+        public class Query : IRequest<Result<List<Listt>>>
         {
 
         }
 
-        public class Handler : IRequestHandler<Query, List<Listt>>
+        public class Handler : IRequestHandler<Query, Result<List<Listt>>>
         {
             private readonly DataContext _context;
 
@@ -27,9 +28,9 @@ namespace Application.ListFeatures
                 _context = context;
             }
 
-            public async Task<List<Listt>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Listt>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Lists.ToListAsync();
+                return Result<List<Listt>>.Success(await _context.Lists.ToListAsync(cancellationToken));
             }
         }
     }

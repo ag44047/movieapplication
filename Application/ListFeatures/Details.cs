@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Persistence;
 using System;
@@ -12,12 +13,12 @@ namespace Application.ListFeatures
 {
     public class Details
     {
-        public class Query : IRequest<Listt>
+        public class Query : IRequest<Result<Listt>>
         {
             public Guid Id { get; set; }
 
         }
-        public class Handler : IRequestHandler<Query, Listt>
+        public class Handler : IRequestHandler<Query, Result<Listt>>
         {
             private readonly DataContext _context;
 
@@ -26,9 +27,11 @@ namespace Application.ListFeatures
                 _context = context;
             }
 
-            public async Task<Listt> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<Listt>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Lists.FindAsync(request.Id);
+                var listt = await _context.Lists.FindAsync(request.Id);
+
+                return Result<Listt>.Success(listt);
             }
         }
     }
