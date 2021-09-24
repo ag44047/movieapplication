@@ -1,6 +1,7 @@
 ﻿using Application.Movies;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -13,7 +14,7 @@ namespace API.Controllers
     public class MoviesController : BaseApiController
     {
        
-
+       
         [HttpGet]
         public async Task<IActionResult> GetMovies()
         {
@@ -21,7 +22,7 @@ namespace API.Controllers
         }
 
 
-
+       
         [HttpGet("{id}")] 
         public async Task<IActionResult> GetMovie(Guid id) 
         {

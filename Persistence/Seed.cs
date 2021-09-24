@@ -3,13 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            if (!roleManager.Roles.Any())
+            {
+                var roles = new List<IdentityRole>
+                {
+                    new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"},
+                    new IdentityRole{Name = "User", NormalizedName = "USER"},
+                };
+                foreach (var role in roles)
+                {
+                    await roleManager.CreateAsync(role);
+                }
+            }
+
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser{DisplayName = "Doruntina", UserName = "Doruntina", Email = "dk40651@ubt-uninet"},
+                    new AppUser{DisplayName = "Rina", UserName = "Rina", Email = "rk48713@ubt-uninet"},
+                    new AppUser{DisplayName = "Doruntina2", UserName = "Doruntina2", Email = "doruntinekorca@gmail.com"},
+                    new AppUser{DisplayName = "Tina", UserName = "DoruntinaTina", Email = "tinnakorqa@gmail.com"}
+                    };
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+
+                await userManager.AddToRoleAsync(users[1], "User");
+
+
+            }
+
+
             if (context.Movies.Any()) return;
 
             var movies = new List<Movie>
