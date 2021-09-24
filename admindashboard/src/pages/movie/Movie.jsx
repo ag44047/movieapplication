@@ -1,7 +1,5 @@
+import "./movie.css";
 import { Link } from "react-router-dom";
-
-import Chart from "../../components/chart/Chart"
-import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 
 export default function Movie() {
@@ -17,7 +15,7 @@ export default function Movie() {
 
                 <div className="productTopRight">
                     <div className="productInfoTop">
-                        <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="productInfoImg" />
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Matrix_Poster.jpg/220px-The_Matrix_Poster.jpg" alt="" className="productInfoImg" />
                         <span className="productName">The Matrix</span>
                     </div>
                     <div className="productInfoBottom">
@@ -58,7 +56,7 @@ export default function Movie() {
                     </div>
                     <div className="productFormRight">
                         <div className="productUpload">
-                            <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="productUploadImg" />
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Matrix_Poster.jpg/220px-The_Matrix_Poster.jpg" alt="" className="productUploadImg" />
                             <label for="file">
                                 <Publish />
                             </label>
@@ -68,6 +66,6 @@ export default function Movie() {
                     </div>
                 </form>
             </div>
-        </div>
+        </div >
     );
 }

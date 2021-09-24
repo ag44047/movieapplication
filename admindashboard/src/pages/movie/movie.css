@@ -1,4 +1,4 @@
-.movie {
+.product {
   flex: 4;
   padding: 20px;
 }
@@ -45,6 +45,7 @@
 }
 
 .productInfoTop {
+  
   display: flex;
   align-items: center;
 }

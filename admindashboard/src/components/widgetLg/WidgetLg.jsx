@@ -12,45 +12,45 @@ export default function WidgetLg() {
                     <th className="widgetLgTh">Customer</th>
                     <th className="widgetLgTh">Date</th>
                     <th className="widgetLgTh">Amount</th>
-                    <th className="widgetLgTh">StatusS</th>
+                    <th className="widgetLgTh">Status</th>
 
                 </tr>
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
-                        <img src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" className="widgetLgImg" />
-                        <span className="widgetLgName">Susan Carole</span>
+                        <img src="https://i.dlpng.com/static/png/6654711_preview.png" alt="" className="widgetLgImg" />
+                        <span className="widgetLgName"> Aferdita Dreshaj</span>
                     </td>
                     <td className="widgetLgDate">2 jun 2021</td>
-                    <td className="widgetLgAmount">$122.0</td>
+                    <td className="widgetLgAmount">$244.0</td>
                     <td className="widgetLgStatus"><Button type="Approved" /></td>
 
 
                 </tr>
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
-                        <img src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" className="widgetLgImg" />
-                        <span className="widgetLgName">Susan Carole</span>
+                        <img src="https://i.dlpng.com/static/png/6654711_preview.png" alt="" className="widgetLgImg" />
+                        <span className="widgetLgName">Trena Halili</span>
                     </td>
                     <td className="widgetLgDate">2 jun 2021</td>
-                    <td className="widgetLgAmount">$122.0</td>
+                    <td className="widgetLgAmount">$132.0</td>
                     <td className="widgetLgStatus"><Button type="Declined" /></td>
 
 
                 </tr>
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
-                        <img src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" className="widgetLgImg" />
-                        <span className="widgetLgName">Susan Carole</span>
+                        <img src="https://i.dlpng.com/static/png/6654711_preview.png" alt="" className="widgetLgImg" />
+                        <span className="widgetLgName">Harea Sadiku</span>
                     </td>
                     <td className="widgetLgDate">2 jun 2021</td>
-                    <td className="widgetLgAmount">$122.0</td>
+                    <td className="widgetLgAmount">$422.0</td>
                     <td className="widgetLgStatus"><Button type="Pending" /></td>
 
 
                 </tr>
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
-                        <img src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" className="widgetLgImg" />
+                        <img src="https://i.dlpng.com/static/png/6654711_preview.png" alt="" className="widgetLgImg" />
                         <span className="widgetLgName">Susan Carole</span>
                     </td>
                     <td className="widgetLgDate">2 jun 2021</td>

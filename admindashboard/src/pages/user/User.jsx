@@ -58,15 +58,15 @@ export default function User() {
                         <div className="userUpdateLeft">
                             <div className="userUpdateItem">
                                 <label>Username</label>
-                                <input type="text" placeholder="Doruntina Korca" className="userUpdateInput" />
+                                <input type="text" placeholder="Username" className="userUpdateInput" />
                             </div>
                             <div className="userUpdateItem">
                                 <label>Fullname</label>
-                                <input type="text" placeholder="Doruntina " className="userUpdateInput" />
+                                <input type="text" placeholder="Fullname " className="userUpdateInput" />
                             </div>
                             <div className="userUpdateItem">
                                 <label>Email</label>
-                                <input type="text" placeholder="DoruntinaKorca@gmail.com" className="userUpdateInput" />
+                                <input type="text" placeholder="user@gmail.com" className="userUpdateInput" />
                             </div>
                             <div className="userUpdateItem">
                                 <label>Phone</label>
@@ -74,7 +74,7 @@ export default function User() {
                             </div>
                             <div className="userUpdateItem">
                                 <label>Address</label>
-                                <input type="text" placeholder="Gjilan " className="userUpdateInput" />
+                                <input type="text" placeholder="address " className="userUpdateInput" />
                             </div>
                         </div>
                         <div className="userUpdateRight">

@@ -27,7 +27,21 @@ export default function MovieList() {
                 );
             },
         },
-
+        {
+            field: "genre",
+            headerName: "Genre",
+            width: 120,
+        },
+        {
+            field: "year",
+            headerName: "Year",
+            width: 120,
+        },
+        {
+            field: "limit",
+            headerName: "Limit",
+            width: 120,
+        },
         {
             field: "status",
             headerName: "Status",
