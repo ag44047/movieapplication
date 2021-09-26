@@ -125,6 +125,8 @@ namespace API.Controllers
         {
             return new UserDto
             {
+                Id = user.Id,
+                Email = user.Email,
                 DisplayName = user.DisplayName,
                 UserImage = null,
                 Token = _tokenService.CreateToken(user),
