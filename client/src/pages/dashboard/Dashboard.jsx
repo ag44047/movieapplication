@@ -1,34 +1,25 @@
-import Sidebar from "./components/sidebar/Sidebar";
-import Topbar from "./components/topbar/Topbar";
-import "./app.css"
-import Home from "./pages/home/Home";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+import React from "react-dom";
+import Sidebar from "../../components/sidebar/Sidebar";
 
-} from "react-router-dom";
-import UserList from "./pages/userList/UserList";
-import User from './pages/user/User';
-import NewUser from './pages/newUser/NewUser';
-import MovieList from './pages/movieList/MovieList';
-import Movie from "./pages/movie/Movie";
-import NewProduct from './pages/newProduct/NewProduct';
+import "./dashboard.css";
+import Adminhome from "../adminhome/Adminhome";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UserList from "../userList/UserList";
+import User from "../user/User";
+import NewUser from "../newUser/NewUser";
+import MovieList from "../movieList/MovieList";
+import Movie from "../movie/Movie";
+import NewProduct from "../newProduct/NewProduct";
 
-
-
-
-
-function App() {
+export default function Dashboard() {
   return (
-    <Router >
-      <Topbar />
+    <Router>
+       
       <div className="container">
-
         <Sidebar />
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Adminhome />
           </Route>
           <Route path="/users">
             <UserList />
@@ -53,5 +44,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

@@ -1,6 +1,7 @@
 ﻿using API.DTOs;
 using API.Services;
 using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,12 @@ namespace API.Controllers
         public async Task<ActionResult<List<AppUser>>> GetAllUsers()
         {
             return await _userManager.Users.ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AppUser>> GetUser(string id)
+        {
+            return  await _userManager.FindByIdAsync(id);
         }
 
         [HttpPost("login")]
@@ -87,12 +94,13 @@ namespace API.Controllers
             return BadRequest("Problem registering user");
         }
 
-        [Authorize]
+      
         [HttpGet("currentuser")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-
+            //ClaimTypes.Email
+            
             return CreateUserObject(user);
         }
 

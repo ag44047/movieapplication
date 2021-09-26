@@ -14,7 +14,7 @@ namespace API.Controllers
     public class MoviesController : BaseApiController
     {
        
-       
+       [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetMovies()
         {
