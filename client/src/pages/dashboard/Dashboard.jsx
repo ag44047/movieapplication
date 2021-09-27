@@ -9,12 +9,11 @@ import User from "../user/User";
 import NewUser from "../newUser/NewUser";
 import MovieList from "../movieList/MovieList";
 import Movie from "../movie/Movie";
-import NewProduct from "../newProduct/NewProduct";
+import NewMovie from "../newMovie/NewMovie";
 
 export default function Dashboard() {
   return (
     <Router>
-       
       <div className="container">
         <Sidebar />
         <Switch>
@@ -36,8 +35,8 @@ export default function Dashboard() {
           <Route path="/movie/:moveiId">
             <Movie />
           </Route>
-          <Route path="/newproduct">
-            <NewProduct />
+          <Route path="/newmovie">
+            <NewMovie />
           </Route>
         </Switch>
       </div>
