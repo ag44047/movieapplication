@@ -1,24 +1,45 @@
+import { useState } from "react";
 import "./login.scss";
-import llogo from  '../../images/llogo.png'
+import llogo from "../../images/llogo.png";
+import { useAuthContext } from "../../lib/context/AuthContext";
 
 export default function Login() {
+  const { login } = useAuthContext();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLogin = (e) => {
+    e.preventDefault();
+
+    login(email, password);
+    console.log("shtyped");
+  };
+
   return (
     <div className="login">
       <div className="top">
         <div className="wrapper">
-          <img
-            className="logo"
-            src={llogo}
-            alt=""
-          />
+          <img className="logo" src={llogo} alt="" />
         </div>
       </div>
       <div className="container">
         <form>
           <h1>Sign In</h1>
-          <input type="email" placeholder="Email or phone number" />
-          <input type="password" placeholder="Password" />
-          <button className="loginButton">Sign In</button>
+          <input
+            type="email"
+            placeholder="Email or phone number"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="loginButton" onClick={onLogin}>
+            Sign In
+          </button>
           <span>
             New to Movie? <b>Sign up now.</b>
           </span>

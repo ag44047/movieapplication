@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "./App.scss";
 import { Home } from "./pages/home/Home";
 import Register from "./pages/register/Register";
@@ -9,18 +10,17 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import Dashboard from "./pages/dashboard/Dashboard";
+import { useAuthContext } from "./lib/context/AuthContext";
 
 function App() {
-
-  const user = true;
+  const { user } = useAuthContext();
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          {user ? <Home /> : <Redirect to="/register" />}
+          {user ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route exact path="/register">
           {!user ? <Register /> : <Redirect to="/" />}
@@ -37,13 +37,14 @@ function App() {
               <Home type="series" />
             </Route>
             <Route exact path="/dashboard">
-            <Dashboard/>
-          </Route>
+              <Dashboard />
+            </Route>
             <Route path="/watchPage">
               <WatchPage />
             </Route>
           </>
         )}
+        <Route path="*">We have no such page like this</Route>
       </Switch>
     </Router>
   );

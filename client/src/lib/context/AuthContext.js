@@ -4,8 +4,10 @@ const initialState = {
   user: undefined,
   error: undefined,
   isLoading: false,
+  reloadAuthentication: () => {},
+  login: () => {},
 };
 
-export const store = createContext(initialState);
+export const AuthContext = createContext(initialState);
 
-export const useAuthContext = () => useContext(store);
+export const useAuthContext = () => useContext(AuthContext);
