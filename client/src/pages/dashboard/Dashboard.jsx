@@ -10,6 +10,7 @@ import NewUser from "../newUser/NewUser";
 import MovieList from "../movieList/MovieList";
 import Movie from "../movie/Movie";
 import NewMovie from "../newMovie/NewMovie";
+import NewProduct from "../newMovie/NewMovie";
 
 export default function Dashboard() {
   return (
@@ -17,26 +18,26 @@ export default function Dashboard() {
       <div className="container">
         <Sidebar />
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/dashboard">
             <Adminhome />
           </Route>
-          <Route path="/users">
+          <Route path="/dashboard/users">
             <UserList />
           </Route>
-          <Route path="/user/:userId">
+          <Route path="/dashboard/user/:userId">
             <User />
           </Route>
-          <Route path="/newUser">
+          <Route path="/dashboard/newUser">
             <NewUser />
           </Route>
-          <Route path="/movies">
+          <Route path="/dashboard/movies">
             <MovieList />
           </Route>
-          <Route path="/movie/:moveiId">
+          <Route path="/dashboard/movie/:moveiId">
             <Movie />
           </Route>
-          <Route path="/newmovie">
-            <NewMovie />
+          <Route path="/dashboard/newproduct">
+            <NewProduct />
           </Route>
         </Switch>
       </div>

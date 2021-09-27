@@ -13,14 +13,21 @@ import {
 import axios from "axios";
 import Dashboard from "./pages/dashboard/Dashboard";
 import { useAuthContext } from "./lib/context/AuthContext";
+import MovieList from "./pages/movieList/MovieList";
 
 function App() {
-  const { user } = useAuthContext();
+  const { user, isLoading } = useAuthContext();
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          {user ? <Home /> : <Redirect to="/login" />}
+          {user ? (
+            <Home />
+          ) : isLoading || !user ? (
+            <h4>Loading...</h4>
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
         <Route exact path="/register">
           {!user ? <Register /> : <Redirect to="/" />}
@@ -28,6 +35,7 @@ function App() {
         <Route exact path="/login">
           {!user ? <Login /> : <Redirect to="/" />}
         </Route>
+
         {user && (
           <>
             <Route path="/movies">
@@ -36,7 +44,31 @@ function App() {
             <Route path="/series">
               <Home type="series" />
             </Route>
+            <Route path="/new-and-popular">
+              <MovieList />
+            </Route>
+            <Route path="/mylist">
+              <MovieList />
+            </Route>
             <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/dashboard/users">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/user/:userId">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/newUser">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/movies">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/movie/:moveiId">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/newproduct">
               <Dashboard />
             </Route>
             <Route path="/watchPage">

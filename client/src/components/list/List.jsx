@@ -1,15 +1,17 @@
-  
+import axios from "axios";
 import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import ListItem from "../listItem/ListItem";
 import "./list.scss";
+import * as API from "../../api/movies/movie";
 
 export default function List() {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
+  const [movies, setMovies] = useState([]);
 
   const listRef = useRef();
 
@@ -25,6 +27,21 @@ export default function List() {
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
   };
+
+  const handleFetchData = async () => {
+    const res = await API.getMovies();
+
+    const data = await res.data;
+
+    console.log("data  ", data);
+
+    setMovies([...data]);
+  };
+
+  useEffect(() => {
+    handleFetchData();
+  }, []);
+
   return (
     <div className="list">
       <span className="listTitle">Continue to watch</span>
@@ -35,16 +52,9 @@ export default function List() {
           style={{ display: !isMoved && "none" }}
         />
         <div className="container" ref={listRef}>
-          <ListItem index={0} />
-          <ListItem index={1} />
-          <ListItem index={2} />
-          <ListItem index={3} />
-          <ListItem index={4} />
-          <ListItem index={5} />
-          <ListItem index={6} />
-          <ListItem index={7} />
-          <ListItem index={8} />
-          <ListItem index={9} />
+          {movies.map((movie, index) => (
+            <ListItem key={`${movie + "" + index}`} index={index} {...movie} />
+          ))}
         </div>
         <ArrowForwardIosOutlined
           className="sliderArrow right"

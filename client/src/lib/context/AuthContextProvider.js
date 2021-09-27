@@ -1,56 +1,73 @@
 import React, { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import * as API from "../../api/user/user";
+import { useHistory } from "react-router";
 
 export function AuthContextProvider(props) {
-  const [state, setState] = useState({
-    user: undefined,
-    error: undefined,
-    isLoading: false,
-  });
+  const [user, setUser] = useState(undefined);
+  const [error, setError] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     reloadAuthentication();
   }, []);
 
-  const reloadAuthentication = () => {
+  const reloadAuthentication = async () => {
     try {
+      setIsLoading(true);
       const user = localStorage.getItem("user");
 
       if (!user) return;
 
-      const userDetails = "";
-      console.log("reloaded");
+      const userObj = JSON.parse(user);
+
+      const userDetails = await API.getUserById(userObj.id);
+      const userData = await userDetails.data;
+      setUser({ ...userData });
     } catch (error) {
-      console.log(error);
+      setError(
+        "Something wrong happened in realoadauthentication method",
+        error
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const login = async (email, password) => {
     try {
-      setState({ ...state, isLoading: true });
+      setIsLoading(isLoading);
       const res = await API.login(email, password);
 
       const data = await res.data;
 
       console.log("data", data);
-      localStorage.setItem("user", data);
+      localStorage.setItem("user", JSON.stringify(data));
 
-      setState({ ...state, user: { ...data }, error: false });
+      setUser({ ...data });
     } catch (err) {
-      throw new Error(err.message);
+      throw new Error(
+        "Something wrong happened while logging in! ",
+        err.message
+      );
     } finally {
-      setState({ ...state, isLoading: false });
-      console.log("stateee", state);
+      setIsLoading(false);
     }
   };
 
+  const logout = async () => {
+    localStorage.removeItem("user");
+    setUser(undefined);
+    setError(false);
+  };
+
   const values = {
-    user: state.user,
-    error: state.error,
-    isLoading: state.isLoading,
+    user: user,
+    error: error,
+    isLoading: isLoading,
     reloadAuthentication,
     login,
+    logout,
   };
 
   return (
