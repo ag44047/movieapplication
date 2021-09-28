@@ -14,7 +14,9 @@ import NewProduct from "../newMovie/NewMovie";
 
 export default function Dashboard() {
   return (
+   
     <Router>
+     
       <div className="container">
         <Sidebar />
         <Switch>

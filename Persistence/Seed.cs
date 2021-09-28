@@ -11,25 +11,12 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            if (!roleManager.Roles.Any())
-            {
-                var roles = new List<IdentityRole>
-                {
-                    new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"},
-                    new IdentityRole{Name = "User", NormalizedName = "USER"},
-                };
-                foreach (var role in roles)
-                {
-                    await roleManager.CreateAsync(role);
-                }
-            }
-
-            if (!userManager.Users.Any())
+            if (!userManager.Users.Any() && !context.Movies.Any() && !roleManager.Roles.Any())
             {
                 var users = new List<AppUser>
                 {
-                    new AppUser{DisplayName = "Doruntina", UserName = "Doruntina", Email = "dk40651@ubt-uninet"},
-                    new AppUser{DisplayName = "Rina", UserName = "Rina", Email = "rk48713@ubt-uninet"},
+                    new AppUser{DisplayName = "Doruntina", UserName = "Doruntina", Email = "dk40651@ubt-uni.net"},
+                    new AppUser{DisplayName = "Rina", UserName = "Rina", Email = "rk48713@ubt-uni.net"},
                     new AppUser{DisplayName = "Doruntina2", UserName = "Doruntina2", Email = "doruntinekorca@gmail.com"},
                     new AppUser{DisplayName = "Tina", UserName = "DoruntinaTina", Email = "tinnakorqa@gmail.com"}
                     };
@@ -38,16 +25,8 @@ namespace Persistence
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
 
-                await userManager.AddToRoleAsync(users[1], "User");
-
-
-            }
-
-
-            if (context.Movies.Any()) return;
-
-            var movies = new List<Movie>
-            {
+                var movies = new List<Movie>
+                {
                 new Movie
                 {
 
@@ -122,14 +101,24 @@ namespace Persistence
                     limit = 16,
                     genre = "comedy",
                     isSeries = true,
+                },
+                 new Movie
+                {
+
+                    title = "modern familypt2",
+                    desc = "test desc5",
+                    img = "https://assets.imgix.net/unsplash/motorbike.jpg?__hstc=158051173.f28454706aca36acc98f7b5490e3215c.1631693507673.1631693507673.1631693507673.1&__hssc=158051173.27.1631693507674&__hsfp=728737239",
+                    imgTitle = "Modern family part2",
+                    imgSm = "https://assets.imgix.net/unsplash/motorbike.jpg?__hstc=158051173.f28454706aca36acc98f7b5490e3215c.1631693507673.1631693507673.1631693507673.1&__hssc=158051173.27.1631693507674&__hsfp=728737239",
+                    trailer = "https://www.youtube.com/watch?v=Ub_lfN2VMIo",
+                    video = "https://www.youtube.com/watch?v=Ub_lfN2VMIo",
+                    year = "2005",
+                    limit = 16,
+                    genre = "comedy",
+                    isSeries = true,
                 }
             };
-
-
-
-            if (context.Lists.Any()) return;
-
-            var lists = new List<Listt>
+                var lists = new List<Listt>
             {
                 new Listt
                 {
@@ -141,6 +130,14 @@ namespace Persistence
                         new MovieListt
                         {
                             Movie= movies[0]
+                        },
+                        new MovieListt
+                        {
+                            Movie= movies[1]
+                        },
+                        new MovieListt
+                        {
+                            Movie= movies[3]
                         }
                     }
                 },
@@ -154,6 +151,10 @@ namespace Persistence
                         new MovieListt
                         {
                             Movie= movies[1]
+                        },
+                        new MovieListt
+                        {
+                            Movie= movies[2]
                         }
                     }
 
@@ -167,7 +168,11 @@ namespace Persistence
                     {
                         new MovieListt
                         {
-                            Movie= movies[3]
+                            Movie= movies[4]
+                        },
+                        new MovieListt
+                        {
+                            Movie= movies[5]
                         }
                     }
 
@@ -186,11 +191,24 @@ namespace Persistence
                     }
                 }
             };
+                var roles = new List<IdentityRole>
+                {
+                    new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"},
+                    new IdentityRole{Name = "Admin", NormalizedName = "USER"},
+                };
 
+              
 
-            await context.Lists.AddRangeAsync(lists);
-            await context.Movies.AddRangeAsync(movies);
-            await context.SaveChangesAsync();
+                foreach (var role in roles)
+                {
+                    await roleManager.CreateAsync(role);
+                }
+               
+
+                await context.Lists.AddRangeAsync(lists);
+                await context.Movies.AddRangeAsync(movies);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
