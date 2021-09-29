@@ -32,5 +32,6 @@ namespace Application.Movies
 
         public bool isSeries { get; set; }
 
+
     }
 }
