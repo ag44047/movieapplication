@@ -88,7 +88,7 @@ namespace API.Controllers
 
             if (result.Succeeded)
             {
-                return CreateUserObject(user);
+               return CreateUserObject(user);
             }
 
             return BadRequest("Problem registering user");

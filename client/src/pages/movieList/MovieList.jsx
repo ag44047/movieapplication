@@ -1,12 +1,37 @@
+import { useState, useEffect } from "react";
 import "./movieList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import * as API from "../../api/movies/movie";
 
 export default function MovieList() {
-  const [data, setData] = useState(productRows);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(undefined);
+
+  const fetchData = async () => {
+    setLoading(true);
+
+    try {
+      const res = await API.getMovies();
+      const data = await res.data;
+
+      setData([...data]);
+      setError(undefined);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -22,7 +47,7 @@ export default function MovieList() {
         return (
           <div className="productListItem">
             <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.name}
+            {params.row.title}
           </div>
         );
       },
@@ -67,6 +92,10 @@ export default function MovieList() {
       },
     },
   ];
+
+  if (loading) return <h6>Loading movies...</h6>;
+
+  if (error) return <h6>Something went wrong, please refresh your page!</h6>;
 
   return (
     <div className="productList">

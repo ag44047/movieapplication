@@ -65,6 +65,12 @@ function App() {
             <Route path="/dashboard/movies">
               <Dashboard />
             </Route>
+            <Route path="/dashboard/listList">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/addMovie">
+              <Dashboard />
+            </Route>
             <Route path="/dashboard/movie/:moveiId">
               <Dashboard />
             </Route>
