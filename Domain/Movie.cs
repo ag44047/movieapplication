@@ -29,7 +29,6 @@ namespace Domain
 
         public bool isSeries { get; set; }
 
-
         public ICollection<MovieListt> movielists { get; set; }
     }
 }
