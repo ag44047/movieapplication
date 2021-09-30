@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./movieList.css";
+import "./listList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
@@ -39,38 +39,21 @@ export default function MovieList() {
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
+
     {
-      field: "movie",
-      headerName: "Movie",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.title}
-          </div>
-        );
-      },
+      field: "title",
+      headerName: "Title",
+      width: 150,
     },
     {
       field: "genre",
       headerName: "Genre",
-      width: 120,
+      width: 150,
     },
     {
-      field: "year",
-      headerName: "Year",
-      width: 120,
-    },
-    {
-      field: "limit",
-      headerName: "Limit",
-      width: 120,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
+      field: "type",
+      headerName: "Type",
+      width: 150,
     },
 
     {
@@ -80,7 +63,7 @@ export default function MovieList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/dashboard/movie/" + params.row.id}>
+            <Link to={"/dashboard/listtt/" + params.row.id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -93,9 +76,9 @@ export default function MovieList() {
     },
   ];
 
-  if (loading) return <h6>Loading movies...</h6>;
-
-  if (error) return <h6>Something went wrong, please refresh your page!</h6>;
+  if (loading) return <h6>Loading lists...</h6>;
+  if (error)
+    return <h6>Something wrong happened, please refresh your page!</h6>;
 
   return (
     <div className="productList">

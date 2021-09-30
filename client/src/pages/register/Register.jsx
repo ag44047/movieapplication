@@ -1,28 +1,39 @@
 import { useRef, useState } from "react";
 import "./register.scss";
-import llogo from  '../../images/llogo.png'
+import llogo from "../../images/llogo.png";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registerUser, setRegisterUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    displayName: "",
+  });
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleStart = () => {
-    setEmail(emailRef.current.value);
+  // const handleStart = () => {
+  //   setEmail(emailRef.current.value);
+  // };
+  // const handleFinish = () => {
+  //   setPassword(passwordRef.current.value);
+  // };
+
+  const handleChange = (e) => {
+    setRegisterUser({ ...registerUser, [e.target.name]: e.target.value });
+    // console.log(registerUser);
   };
-  const handleFinish = () => {
-    setPassword(passwordRef.current.value);
+
+  const handleSubmit = () => {
+    console.log(registerUser);
   };
   return (
     <div className="register">
       <div className="top">
         <div className="wrapper">
-          <img
-            className="logo"
-            src={llogo}
-            alt=""
-          />
+          <img className="logo" src={llogo} alt="" />
           <button className="loginButton">Sign In</button>
         </div>
       </div>
@@ -34,15 +45,25 @@ export default function Register() {
         </p>
         {!email ? (
           <div className="input">
-            <input type="email" placeholder="email address" ref={emailRef} />
-            <button className="registerButton" onClick={handleStart}>
+            <input
+              type="email"
+              name="email"
+              placeholder="email address"
+              onChange={handleChange}
+            />
+            <button className="registerButton" onClick={handleSubmit}>
               Get Started
             </button>
           </div>
         ) : (
-          <form className="input">
-            <input type="password" placeholder="password" ref={passwordRef} />
-            <button className="registerButton" onClick={handleFinish}>
+          <form className="input" onSubmit={handleSubmit}>
+            <input
+              type="password"
+              placeholder="password"
+              onChange={handleChange}
+              name="password"
+            />
+            <button className="registerButton" type="submit">
               Start
             </button>
           </form>

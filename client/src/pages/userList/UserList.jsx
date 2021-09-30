@@ -34,7 +34,7 @@ export default function UserList() {
     { field: "id", headerName: "ID", width: 90 },
     {
       field: "displayName",
-      headerName: "Name",
+      headerName: "Username",
       width: 200,
       renderCell: (params) => {
         return (
@@ -46,19 +46,7 @@ export default function UserList() {
       },
     },
     { field: "email", headerName: "Email", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.emailConfirmed ? "Active" : "NonActive"}
-          </div>
-        );
-      },
-    },
+
 
     {
       field: "action",

@@ -1,31 +1,51 @@
-import "./newMovie.css";
+import "./addMovie.css";
 import { useState } from "react";
+import * as API from "../../api/movies/movie";
 
-export default function NewProduct() {
-  const [movie, setMovie] = useState(null);
-  const [img, setImg] = useState(null);
-  const [imgTitle, setImgTitle] = useState(null);
-  const [imgSm, setImgSm] = useState(null);
-  const [trailer, setTrailer] = useState(null);
-  const [video, setVideo] = useState(null);
+export default function AddMovie() {
+  const [movie, setMovie] = useState({
+    title: "",
+    desc: "",
+    img: "",
+    imgSm: "",
+    trailer: "",
+    video: "",
+    year: "",
+    limit: 0,
+    genre: "",
+    isSeries: false,
+    movielists: [],
+  });
+
+  //   const [img, setImg] = useState(null);
+  //   const [imgTitle, setImgTitle] = useState(null);
+  //   const [imgSm, setImgSm] = useState(null);
+  //   const [trailer, setTrailer] = useState(null);
+  //   const [video, setVideo] = useState(null);
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setMovie({ ...movie, [e.target.name]: value });
+    setMovie({ ...movie, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    // const value = e.target.value;
+    // setMovie({ ...movie, [e.target.name]: value });
+    e.preventDefault();
+    console.log("movie:  ", movie);
+    const res = await API.addMovie(movie);
+    // const data = await res.data;
+
+    console.log(res);
   };
 
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Movie!!!!!!</h1>
-      <form className="addProductForm">
+      <form className="addProductForm" onSubmit={handleSubmit}>
         <div className="addProductItem">
           <label>Image</label>
-          <input
-            type="file"
-            id="Img"
-            name="img"
-            onChange={(e) => setImg(e.target.files[0])}
-          />
+          <input type="file" id="Img" name="img" onChange={handleChange} />
         </div>
         <div className="addProductItem">
           <label>Title Image</label>
@@ -33,17 +53,12 @@ export default function NewProduct() {
             type="file"
             id="ImgTitle"
             name="imgTitle"
-            onChange={(e) => setImgTitle(e.target.files[0])}
+            onChange={handleChange}
           />
         </div>
         <div className="addProductItem">
           <label>Thumbnail Image</label>
-          <input
-            type="file"
-            id="ImgSm"
-            name="imgSm"
-            onChange={(e) => setImgSm(e.target.files[0])}
-          />
+          <input type="file" id="ImgSm" name="imgSm" onChange={handleChange} />
         </div>
         <div className="addProductItem">
           <label>Title</label>
@@ -59,7 +74,7 @@ export default function NewProduct() {
           <input
             type="text"
             placeholder=" Description"
-            name="description"
+            name="desc"
             onChange={handleChange}
           />
         </div>
@@ -101,28 +116,22 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Is Series?</label>
-          <select name="isSeries" id="IsSeries">
+          <select name="isSeries" id="IsSeries" onChange={handleChange}>
             <option value="false">No</option>
             <option value="true">Yes</option>
           </select>
         </div>
         <div className="addProductItem">
           <label>Trailer</label>
-          <input
-            type="file"
-            name="trailer"
-            onChange={(e) => setTrailer(e.target.files[0])}
-          />
+          <input type="file" name="trailer" onChange={handleChange} />
         </div>
         <div className="addProductItem">
           <label>Video</label>
-          <input
-            type="file"
-            name="video"
-            onChange={(e) => setVideo(e.target.files[0])}
-          />
+          <input type="file" name="video" onChange={handleChange} />
         </div>
-        <button className="addProductButton">Create</button>
+        <button className="addProductButton" type="submit">
+          Create
+        </button>
       </form>
     </div>
   );

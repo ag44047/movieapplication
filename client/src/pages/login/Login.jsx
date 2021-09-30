@@ -2,11 +2,14 @@ import { useState } from "react";
 import "./login.scss";
 import llogo from "../../images/llogo.png";
 import { useAuthContext } from "../../lib/context/AuthContext";
+import { useHistory } from "react-router";
 
 export default function Login() {
   const { login } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const history = useHistory();
 
   const onLogin = (e) => {
     e.preventDefault();
@@ -41,7 +44,8 @@ export default function Login() {
             Sign In
           </button>
           <span>
-            New to Movie? <b>Sign up now.</b>
+            New to Movie?{" "}
+            <b onClick={() => history.push("/register")}>Sign up now.</b>
           </span>
         </form>
       </div>
