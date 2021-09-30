@@ -21,13 +21,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          {user ? (
-            <Home />
-          ) : isLoading || !user ? (
-            <h4>Loading...</h4>
-          ) : (
-            <Redirect to="/login" />
-          )}
+          {user ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route exact path="/register">
           {!user ? <Register /> : <Redirect to="/" />}
@@ -39,10 +33,10 @@ function App() {
         {user && (
           <>
             <Route path="/movies">
-              <Home type="movies" />
+              <Home type="/movies" />
             </Route>
             <Route path="/series">
-              <Home type="series" />
+              <Home type="/series" />
             </Route>
             <Route path="/new-and-popular">
               <MovieList />
@@ -50,7 +44,7 @@ function App() {
             <Route path="/mylist">
               <MovieList />
             </Route>
-            <Route exact path="/dashboard">
+            <Route path="/dashboard">
               <Dashboard />
             </Route>
             <Route exact path="/dashboard/users">
@@ -69,6 +63,9 @@ function App() {
               <Dashboard />
             </Route>
             <Route path="/dashboard/addMovie">
+              <Dashboard />
+            </Route>
+            <Route path="/dashboard/addUser">
               <Dashboard />
             </Route>
             <Route path="/dashboard/movie/:moveiId">

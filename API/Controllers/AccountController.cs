@@ -121,6 +121,35 @@ namespace API.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditUser(string id, EditDto user)
+        {
+            var originalUser = await _userManager.FindByIdAsync(id);
+            if (originalUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            //originalUser.Email = user.Email;
+            //originalUser.DisplayName = user.DisplayName;
+            //originalUser.UserName = user.Username;
+            //originalUser.PhoneNumber = user.PhoneNumber;
+
+            var userA = new AppUser
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                UserName = user.Username,
+                PhoneNumber = user.PhoneNumber,
+            };
+
+            var res = await _userManager.UpdateAsync(userA);
+
+            return Ok("Succcess");
+
+            
+        }
+
         private UserDto CreateUserObject(AppUser user)
         {
             return new UserDto

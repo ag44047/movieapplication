@@ -13,9 +13,8 @@ import AddUser from "../addUser/AddUser";
 import AddMovie from "../addMovie/AddMovie";
 import AddList from "../addList/AddList";
 import ListList from "../listList/ListList";
-import List from './../../components/list/List';
-import Listtt from './../listtt/Listtt';
-
+import List from "./../../components/list/List";
+import Listtt from "./../listtt/Listtt";
 
 export default function Dashboard() {
   return (
@@ -57,7 +56,6 @@ export default function Dashboard() {
           <Route path="/dashboard/listtt/:listttId">
             <Listtt />
           </Route>
-
         </Switch>
       </div>
     </Router>

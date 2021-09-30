@@ -22,8 +22,9 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/dashboard" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard" ? "active" : ""
+                }`}
               >
                 <LineStyle className="sidebarIcon" />
                 Home
@@ -36,8 +37,9 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/dashboard/users" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard/users" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard/users" ? "active" : ""
+                }`}
               >
                 <PermIdentity className="sidebarIcon" />
                 Users
@@ -45,8 +47,9 @@ export default function Sidebar() {
             </Link>
             <Link to="/dashboard/movies" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard/movies" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard/movies" ? "active" : ""
+                }`}
               >
                 <PlayCircleOutline className="sidebarIcon" />
                 Movies
@@ -54,8 +57,9 @@ export default function Sidebar() {
             </Link>
             <Link to="/dashboard/listList" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard/listList" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard/listList" ? "active" : ""
+                }`}
               >
                 <AddToQueue className="sidebarIcon" />
                 Lists
@@ -63,8 +67,9 @@ export default function Sidebar() {
             </Link>
             <Link to="/dashboard/addUser" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard/addUser" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard/addUser" ? "active" : ""
+                }`}
               >
                 <AddToQueue className="sidebarIcon" />
                 Add User
@@ -72,8 +77,9 @@ export default function Sidebar() {
             </Link>
             <Link to="/dashboard/addMovie" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard/addMovie" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard/addMovie" ? "active" : ""
+                }`}
               >
                 <AddToQueue className="sidebarIcon" />
                 Add movie
@@ -81,8 +87,9 @@ export default function Sidebar() {
             </Link>
             <Link to="/dashboard/addList" className="link">
               <li
-                className={`sidebarListItem ${pathname === "/dashboard/addList" ? "active" : ""
-                  }`}
+                className={`sidebarListItem ${
+                  pathname === "/dashboard/addList" ? "active" : ""
+                }`}
               >
                 <AddToQueue className="sidebarIcon" />
                 Add List
@@ -94,22 +101,25 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
             <li
-              className={`sidebarListItem ${pathname === "/dashboard/mail" ? "active" : ""
-                }`}
+              className={`sidebarListItem ${
+                pathname === "/dashboard/mail" ? "active" : ""
+              }`}
             >
               <MailOutline className="sidebarIcon" />
               Mail
             </li>
             <li
-              className={`sidebarListItem ${pathname === "/dashboard/feedback" ? "active" : ""
-                }`}
+              className={`sidebarListItem ${
+                pathname === "/dashboard/feedback" ? "active" : ""
+              }`}
             >
               <DynamicFeed className="sidebarIcon" />
               Feedback
             </li>
             <li
-              className={`sidebarListItem ${pathname === "/dashboard/messages" ? "active" : ""
-                }`}
+              className={`sidebarListItem ${
+                pathname === "/dashboard/messages" ? "active" : ""
+              }`}
             >
               <ChatBubbleOutline className="sidebarIcon" />
               Messages
@@ -120,8 +130,9 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
             <li
-              className={`sidebarListItem ${pathname === "/dashboard/manage" ? "active" : ""
-                }`}
+              className={`sidebarListItem ${
+                pathname === "/dashboard/manage" ? "active" : ""
+              }`}
             >
               <WorkOutline className="sidebarIcon" />
               Manage
