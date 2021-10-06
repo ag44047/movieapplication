@@ -155,39 +155,6 @@ namespace API.Controllers
             }
         }
 
-<<<<<<< HEAD
-
-
-=======
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditUser(string id, EditDto user)
-        {
-            var originalUser = await _userManager.FindByIdAsync(id);
-            if (originalUser == null)
-            {
-                return NotFound("User not found.");
-            }
-
-            //originalUser.Email = user.Email;
-            //originalUser.DisplayName = user.DisplayName;
-            //originalUser.UserName = user.Username;
-            //originalUser.PhoneNumber = user.PhoneNumber;
-
-            var userA = new AppUser
-            {
-                DisplayName = user.DisplayName,
-                Email = user.Email,
-                UserName = user.Username,
-                PhoneNumber = user.PhoneNumber,
-            };
-
-            var res = await _userManager.UpdateAsync(userA);
-
-            return Ok("Succcess");
-
-            
-        }
->>>>>>> a7d90253a4623b0820fe637ac58a75411e0774cf
 
         private UserDto CreateUserObject(AppUser user)
         {
