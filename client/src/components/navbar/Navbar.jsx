@@ -10,7 +10,7 @@ import { useAuthContext } from "../../lib/context/AuthContext";
 
 const Navbar = () => {
   const history = useHistory();
-  //the initial state is going to be false, dmth pa e bo scroll sbohet black.
+
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, logout } = useAuthContext();
   //whenever we scroll, is gonna run this function
@@ -34,15 +34,13 @@ const Navbar = () => {
           <Link to="/movies" className="link">
             <span>Movies</span>
           </Link>
+          <Link to="/contactUs" className="link">
+            <span>Contact Us</span>
+          </Link>
           <Link to="/dashboard" className="link">
             <span>Dashboard</span>
           </Link>
-          <Link to="/new-and-popular" className="link">
-            <span>New and Popular</span>
-          </Link>
-          <Link to="/mylist" className="link">
-            <span>My List</span>
-          </Link>
+          
         </div>
         <div className="right">
           {user && (
@@ -53,7 +51,9 @@ const Navbar = () => {
               <div className="profile">
                 <ArrowDropDownIcon className="icon" />
                 <div className="options">
-                  <span>Settings</span>
+                <Link to="/myProfile" className="link">
+            <span>My Profile</span>
+          </Link>
                   <span
                     onClick={() => {
                       history.push("/login");

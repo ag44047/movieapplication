@@ -36,6 +36,8 @@ namespace API.Controllers
             _roleManager = roleManager;
         }
 
+
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<List<AppUser>>> GetAllUsers()
@@ -48,6 +50,9 @@ namespace API.Controllers
         {
             return  await _userManager.FindByIdAsync(id);
         }
+
+
+
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto LoginDto)
@@ -64,6 +69,29 @@ namespace API.Controllers
             }
             return Unauthorized();
         }
+
+
+
+
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> EditUser(EditUserDto user, string id)
+        {
+
+            var userUpdated = await _userManager.FindByIdAsync(id);
+
+            if (user == null) return NotFound();
+
+            userUpdated.Email = user.Email; 
+            userUpdated.DisplayName = user.DisplayName; 
+            userUpdated.UserName = user.Username; 
+            userUpdated.PhoneNumber = user.PhoneNumber; 
+
+            return Ok(await _userManager.UpdateAsync(userUpdated));
+        }
+
+
+
 
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -94,6 +122,9 @@ namespace API.Controllers
             return BadRequest("Problem registering user");
         }
 
+
+
+
       
         [HttpGet("currentuser")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
@@ -103,6 +134,9 @@ namespace API.Controllers
             
             return CreateUserObject(user);
         }
+
+
+
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
@@ -120,6 +154,40 @@ namespace API.Controllers
                 return Ok(await _userManager.DeleteAsync(user));
             }
         }
+
+<<<<<<< HEAD
+
+
+=======
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditUser(string id, EditDto user)
+        {
+            var originalUser = await _userManager.FindByIdAsync(id);
+            if (originalUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            //originalUser.Email = user.Email;
+            //originalUser.DisplayName = user.DisplayName;
+            //originalUser.UserName = user.Username;
+            //originalUser.PhoneNumber = user.PhoneNumber;
+
+            var userA = new AppUser
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                UserName = user.Username,
+                PhoneNumber = user.PhoneNumber,
+            };
+
+            var res = await _userManager.UpdateAsync(userA);
+
+            return Ok("Succcess");
+
+            
+        }
+>>>>>>> a7d90253a4623b0820fe637ac58a75411e0774cf
 
         private UserDto CreateUserObject(AppUser user)
         {

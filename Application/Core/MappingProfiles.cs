@@ -17,6 +17,7 @@ namespace Application.Core
             CreateMap<Movie, Movie>();
             CreateMap<Listt, Listt>();
             CreateMap<Listt, ListtDto>();
+           
             CreateMap<MovieListt, MovieDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(a => a.Movie.Id))
                 .ForMember(d => d.title, o => o.MapFrom(a => a.Movie.title))

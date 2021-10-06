@@ -17,7 +17,7 @@ namespace API.DTOs
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression("(?=.*\\d).{6,10}$",ErrorMessage="Password must be comples")]
+        //[RegularExpression("(?=.*\\d).{6,10}$", ErrorMessage = "Password must be complex")]
         public string Password { get; set; }
 
         [Required]

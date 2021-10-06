@@ -11,6 +11,16 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            //if (context.Message.Any()) return;
+
+            //var messages = new List<Message>
+            //{
+            //    new Message
+            //    {
+            //        MessageDesc = "I wanted to ask you if the new aquaman movie will be on your page."
+            //    }
+            //};
+
             if (!userManager.Users.Any() && !context.Movies.Any() && !roleManager.Roles.Any())
             {
                 var users = new List<AppUser>

@@ -38,36 +38,21 @@ export default function Register() {
         </div>
       </div>
       <div className="container">
-        <h1>Unlimited movies, TV shows, and more.</h1>
-        <h2>Watch anywhere. </h2>
-        <p>
-          Ready to watch? Enter your email to create or restart your membership.
-        </p>
-        {!email ? (
-          <div className="input">
-            <input
-              type="email"
-              name="email"
-              placeholder="email address"
-              onChange={handleChange}
-            />
-            <button className="registerButton" onClick={handleSubmit}>
-              Get Started
+        
+        <form>
+          <h2>Sign Up</h2>
+          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="DisplayName" />
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Confirm Password" />
+          <button className="registerButton" type="submit">
+              Register
             </button>
-          </div>
-        ) : (
-          <form className="input" onSubmit={handleSubmit}>
-            <input
-              type="password"
-              placeholder="password"
-              onChange={handleChange}
-              name="password"
-            />
-            <button className="registerButton" type="submit">
-              Start
-            </button>
-          </form>
-        )}
+            <span>
+            Already have an account? <b>Sign in.</b>
+          </span>
+        </form>
       </div>
     </div>
   );

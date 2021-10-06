@@ -15,8 +15,10 @@ export default function MovieList() {
     setLoading(true);
 
     try {
-      const res = await API.getMovies();
+      const res = await API.getLists();
       const data = await res.data;
+
+      console.log("listlist: ", data);
 
       setData([...data]);
       setError(undefined);
@@ -33,25 +35,27 @@ export default function MovieList() {
     fetchData();
   }, []);
 
+  console.log("data:", data);
+
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", headerName: "id", width: 90 },
 
     {
-      field: "title",
+      field: "listTitle",
       headerName: "Title",
       width: 150,
     },
     {
-      field: "genre",
+      field: "listGenre",
       headerName: "Genre",
       width: 150,
     },
     {
-      field: "type",
+      field: "listType",
       headerName: "Type",
       width: 150,
     },

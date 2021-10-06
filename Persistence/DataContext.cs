@@ -12,8 +12,9 @@ namespace Persistence
         }
         public DbSet <Movie> Movies { get; set; }
         public  DbSet<Listt> Lists { get; set; }
+        public DbSet <MovieListt> movieListts { get; set; }
 
-         public DbSet <MovieListt> movieListts { get; set; }
+       // public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
