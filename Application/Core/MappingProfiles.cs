@@ -17,7 +17,7 @@ namespace Application.Core
             CreateMap<Movie, Movie>();
             CreateMap<Listt, Listt>();
             CreateMap<Listt, ListtDto>();
-           
+            CreateMap<AppUser, Profile>();
             CreateMap<MovieListt, MovieDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(a => a.Movie.Id))
                 .ForMember(d => d.title, o => o.MapFrom(a => a.Movie.title))
@@ -31,6 +31,9 @@ namespace Application.Core
                 .ForMember(d => d.limit, o => o.MapFrom(a => a.Movie.limit))
                 .ForMember(d => d.genre, o => o.MapFrom(a => a.Movie.genre))
                 .ForMember(d => d.isSeries, o => o.MapFrom(a => a.Movie.isSeries));
+            CreateMap<AppUser, Profiles.Profile>()
+                .ForMember(d => d.Image, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
         }
+
     }
 }

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Application.Interfaces
 {
-  public  class Message
+    public interface IUserAccessor
     {
-        public Guid Id { get; set; }
-
-        public string MessageDesc { get; set; }
-  
+        string GetUsername();
     }
 }

@@ -7,6 +7,7 @@ using API.Middleware;
 using Application.Core;
 using Application.ListFeatures;
 using Application.Movies;
+using Application.Profiles;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -50,6 +51,7 @@ namespace API
 
                 config.RegisterValidatorsFromAssemblyContaining<MovieValidator>();
                 config.RegisterValidatorsFromAssemblyContaining<ListValidator>();
+                config.RegisterValidatorsFromAssemblyContaining<ProfileValidator>();
             });
             services.AddApplicationServices(_config);
 
