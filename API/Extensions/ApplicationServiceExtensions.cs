@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Application.ListFeatures;
 using Application.Movies;
+using Infrastructure.Email;
 using Infrastructure.Photos;
 using Infrastructure.Security;
 using MediatR;
@@ -35,7 +36,11 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                 //   .WithExposedHeaders("WWW-Authenticate")
+                    .WithOrigins("http://localhost:3000");
                 });
             });
             services.AddMediatR(typeof(MovieList.Handler).Assembly);
@@ -43,6 +48,7 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.AddScoped<EmailSender>();
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             
             return services;

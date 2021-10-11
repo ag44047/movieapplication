@@ -21,9 +21,12 @@ namespace API.Extensions
             services.AddIdentity<AppUser, IdentityRole>(
                 opt => {
                     opt.Password.RequireNonAlphanumeric = false;
-                    opt.Password.RequiredLength = 6;
+                    opt.SignIn.RequireConfirmedEmail = true;
 
-                }).AddEntityFrameworkStores<DataContext>().AddSignInManager<SignInManager<AppUser>>().AddRoleManager<RoleManager<IdentityRole>>();
+                }).AddEntityFrameworkStores<DataContext>()
+                .AddSignInManager<SignInManager<AppUser>>()
+                .AddDefaultTokenProviders()
+                .AddRoleManager<RoleManager<IdentityRole>>();
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
@@ -35,6 +38,8 @@ namespace API.Extensions
                     IssuerSigningKey = key,
                     ValidateIssuer = false,
                     ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
                 };
             });
             services.AddScoped<TokenService>();
