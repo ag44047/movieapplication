@@ -103,10 +103,10 @@ export default function User() {
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Fullname</label>
+                <label>DisplayName</label>
                 <input
                   type="text"
-                  placeholder="Fullname "
+                  placeholder="DisplayName "
                   className="userUpdateInput"
                   onChange={(e) =>
                     setUserEdit({ ...userEdit, displayName: e.target.value })

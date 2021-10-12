@@ -14,7 +14,6 @@ namespace Persistence
         public  DbSet<Listt> Lists { get; set; }
         public DbSet <MovieListt> movieListts { get; set; }
 
-        public DbSet<Photo> Photos { get; set; }
 
        // public DbSet<Message> Messages { get; set; }
 

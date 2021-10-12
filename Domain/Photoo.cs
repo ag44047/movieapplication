@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Photos
+namespace Domain
 {
-    public class PhotoUploadResult
+    public class Photoo
     {
-        public string PublicId { get; set; }
+        public string Id { get; set; }
+
         public string Url { get; set; }
+
+        public bool IsMain { get; set; }
     }
 }

@@ -15,11 +15,14 @@ namespace API.Controllers
     {
   
 
+
         [HttpGet]
         public async Task<ActionResult<List<Listt>>> GetLists()
         {
             return HandleResult(await Mediator.Send(new ListOfLists.Query()));
         }
+
+
 
 
         [HttpGet("{id}")]
@@ -28,11 +31,15 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> CreateListt(Listt listt)
         {
             return HandleResult(await Mediator.Send(new Create.Command { Listt = listt }));
         }
+
+
 
 
         [HttpPut("{id}")]
@@ -41,6 +48,8 @@ namespace API.Controllers
             listt.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command { Listt = listt }));
         }
+
+
 
 
         [HttpDelete("{id}")]

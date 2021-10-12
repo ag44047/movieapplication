@@ -47,6 +47,7 @@ namespace API.Controllers
 
 
 
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<AppUser>>> GetAllUsers()
@@ -54,36 +55,16 @@ namespace API.Controllers
             return await _userManager.Users.ToListAsync();
         }
 
+
+
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(string id)
         {
             return await _userManager.FindByIdAsync(id);
         }
 
-
-
-        [AllowAnonymous]
-        [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto LoginDto)
-        {
-            var user = await _userManager.Users.Include(p => p.Photos)
-                .FirstOrDefaultAsync(x => x.Email == LoginDto.Email);
-
-            if (user == null) return Unauthorized("Invalid Email");
-
-            if (user.UserName == "Doruntina") user.EmailConfirmed = true;
-
-            if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, LoginDto.Password, false);
-
-            if (result.Succeeded)
-            {
-                await SetRefreshToken(user);
-                return CreateUserObject(user);
-            }
-            return Unauthorized("Invalid password");
-        }
 
 
 
@@ -104,6 +85,63 @@ namespace API.Controllers
 
             return Ok(await _userManager.UpdateAsync(userUpdated));
         }
+
+
+
+
+
+
+
+        //[AllowAnonymous]
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return BadRequest("You can't delete this user because it doesn't exist");
+            }
+            else
+            {
+                return Ok(await _userManager.DeleteAsync(user));
+            }
+        }
+
+
+
+
+
+
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto LoginDto)
+        {
+            var user = await _userManager.Users
+                .FirstOrDefaultAsync(x => x.Email == LoginDto.Email);
+
+            if (user == null) return Unauthorized("Invalid Email");
+
+            if (user.UserName == "Doruntina") user.EmailConfirmed = true;
+
+            if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, LoginDto.Password, false);
+
+            if (result.Succeeded)
+            {
+                await SetRefreshToken(user);
+                return CreateUserObject(user);
+            }
+            return Unauthorized("Invalid password");
+        }
+
+
+
+
 
 
 
@@ -158,6 +196,13 @@ namespace API.Controllers
 
         }
 
+
+
+
+
+
+
+
         [AllowAnonymous]
         [HttpPost("verifyEmail")]
 
@@ -177,6 +222,11 @@ namespace API.Controllers
 
             return Ok("Email confirmed - you can now login");
         }
+
+
+
+
+
 
 
         [AllowAnonymous]
@@ -203,12 +253,17 @@ namespace API.Controllers
             return Ok("Email verification link resent");
         }
 
+
+
+
+
+
         [Authorize]
         [HttpGet("currentuser")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var user = await _userManager
-                .Users.Include(p=>p.Photos)
+                .Users
                 .FirstOrDefaultAsync(x=>x.Email == User.FindFirstValue(ClaimTypes.Email));
             //ClaimTypes.Email
             
@@ -217,23 +272,10 @@ namespace API.Controllers
 
 
 
-        //[AllowAnonymous]
-        [Authorize(Roles = "Admin")]
-        [HttpDelete("{id}")]
+       
 
-        public async Task<IActionResult> DeleteUser(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
 
-            if (user == null)
-            {
-                return BadRequest("You can't delete this user because it doesn't exist");
-            }
-            else
-            {
-                return Ok(await _userManager.DeleteAsync(user));
-            }
-        }
+
 
         [Authorize]
         [HttpPost("refreshToken")]
@@ -243,7 +285,6 @@ namespace API.Controllers
 
             var user = await _userManager.Users
                 .Include(r => r.RefreshTokens)
-                .Include(p => p.Photos)
                 .FirstOrDefaultAsync(x => x.UserName == User.FindFirstValue(ClaimTypes.Name));
 
             if (user == null) return Unauthorized();
@@ -255,6 +296,11 @@ namespace API.Controllers
 
             return CreateUserObject(user);
         }
+
+
+
+
+
 
 
         private async Task SetRefreshToken(AppUser user)
@@ -274,6 +320,13 @@ namespace API.Controllers
             Response.Cookies
                 .Append("refreshToken", refreshToken.Token, cookieOptions);
         }
+
+
+
+
+
+
+
         private UserDto CreateUserObject(AppUser user)
         {
             return new UserDto
@@ -281,7 +334,7 @@ namespace API.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 DisplayName = user.DisplayName,
-                Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                Image = null,
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName,
             };

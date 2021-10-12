@@ -31,8 +31,8 @@ namespace Application.Core
                 .ForMember(d => d.limit, o => o.MapFrom(a => a.Movie.limit))
                 .ForMember(d => d.genre, o => o.MapFrom(a => a.Movie.genre))
                 .ForMember(d => d.isSeries, o => o.MapFrom(a => a.Movie.isSeries));
-            CreateMap<AppUser, Profiles.Profile>()
-                .ForMember(d => d.Image, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
+         //   CreateMap<AppUser, Profiles.Profile>()
+              //  .ForMember(d => d.Image, o => o.MapFrom(s => s.Photoos.FirstOrDefault(x => x.IsMain).Url));
         }
 
     }

@@ -22,12 +22,16 @@ namespace API.Controllers
         }
 
 
+
+
        
         [HttpGet("{id}")] 
         public async Task<IActionResult> GetMovie(Guid id) 
         {
          return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
+
+
 
 
 
@@ -39,12 +43,16 @@ namespace API.Controllers
 
 
 
+
+
         [HttpPut("{id}")]
         public async Task<IActionResult> EditMovie(Guid id, Movie movie)
         {
             movie.Id = id;
             return HandleResult(await Mediator.Send(new EditMovie.Command { Movie = movie }));
         }
+
+
 
 
 

@@ -68,8 +68,8 @@ export default function MovieList() {
       width: 120,
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "isSeries",
+      headerName: "isSeries",
       width: 120,
     },
 

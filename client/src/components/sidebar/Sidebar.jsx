@@ -71,7 +71,7 @@ export default function Sidebar() {
                   pathname === "/dashboard/addUser" ? "active" : ""
                 }`}
               >
-                <AddToQueue className="sidebarIcon" />
+                <PermIdentity className="sidebarIcon" />
                 Add User
               </li>
             </Link>
@@ -81,7 +81,7 @@ export default function Sidebar() {
                   pathname === "/dashboard/addMovie" ? "active" : ""
                 }`}
               >
-                <AddToQueue className="sidebarIcon" />
+                <PlayCircleOutline className="sidebarIcon" />
                 Add movie
               </li>
             </Link>
@@ -108,14 +108,7 @@ export default function Sidebar() {
               <MailOutline className="sidebarIcon" />
               Mail
             </li>
-            <li
-              className={`sidebarListItem ${
-                pathname === "/dashboard/feedback" ? "active" : ""
-              }`}
-            >
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
+            
             <li
               className={`sidebarListItem ${
                 pathname === "/dashboard/messages" ? "active" : ""

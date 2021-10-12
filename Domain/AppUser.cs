@@ -11,7 +11,8 @@ namespace Domain
     {
         public string DisplayName { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public bool IsAdmin { get; set; }
+
 
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 

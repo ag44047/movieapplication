@@ -38,6 +38,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -162,7 +165,7 @@ namespace Persistence.Migrations
                     b.ToTable("movieListts");
                 });
 
-            modelBuilder.Entity("Domain.Photo", b =>
+            modelBuilder.Entity("Domain.Photoo", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -180,7 +183,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photoo");
                 });
 
             modelBuilder.Entity("Domain.RefreshToken", b =>
@@ -355,10 +358,10 @@ namespace Persistence.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("Domain.Photo", b =>
+            modelBuilder.Entity("Domain.Photoo", b =>
                 {
                     b.HasOne("Domain.AppUser", null)
-                        .WithMany("Photos")
+                        .WithMany("Photoos")
                         .HasForeignKey("AppUserId");
                 });
 
@@ -424,7 +427,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.AppUser", b =>
                 {
-                    b.Navigation("Photos");
+                    b.Navigation("Photoos");
 
                     b.Navigation("RefreshTokens");
                 });

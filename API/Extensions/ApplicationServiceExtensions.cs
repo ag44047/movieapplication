@@ -3,7 +3,6 @@ using Application.Interfaces;
 using Application.ListFeatures;
 using Application.Movies;
 using Infrastructure.Email;
-using Infrastructure.Photos;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -28,10 +27,14 @@ namespace API.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+
+
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
+
+
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
@@ -43,13 +46,15 @@ namespace API.Extensions
                     .WithOrigins("http://localhost:3000");
                 });
             });
+
+
             services.AddMediatR(typeof(MovieList.Handler).Assembly);
             services.AddMediatR(typeof(ListOfLists.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
-            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+          
             services.AddScoped<EmailSender>();
-            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
+       
             
             return services;
         }
