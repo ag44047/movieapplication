@@ -22,80 +22,76 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { user, isLoading, isAuthenticated } = useAuthContext();
-  if (isLoading) return <h6>Loading... please wait!</h6>;
 
-  console.log(user);
-  console.log("i", isAuthenticated);
-
+  if (isLoading && !user) return <h6>Loading... please wait!</h6>;
   return (
     <Router>
       <ToastContainer />
-      <Switch>
-        {!isAuthenticated && (
-          <>
-            <Route exact path="/">
-              {user ? <Home /> : <Redirect to="/login" />}
-            </Route>
-            <Route exact path="/register">
-              {!user ? <Register /> : <Redirect to="/" />}
-            </Route>
-            <Route exact path="/login">
-              {!user ? <Login /> : <Redirect to="/" />}
-            </Route>
-          </>
-        )}
 
-        {isAuthenticated && (
-          <>
-            <Route path="/movies" exact>
-              <Home type="/movies" />
-            </Route>
-            <Route path="/series" exact>
-              <Home type="/series" />
-            </Route>
-            <Route path="/contactUs" exact>
-              <ContactUs />
-            </Route>
-            <Route path="/dashboard" exact>
-              <Dashboard />
-            </Route>
-            <Route exact path="/dashboard/users" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/user/:userId" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/newUser" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/movies" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/listList" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/addMovie" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/addUser" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/movie/:moveiId" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/dashboard/newMovie" exact>
-              <Dashboard />
-            </Route>
-            <Route path="/watchPage" exact>
-              <WatchPage />
-            </Route>
-            <Route path="/myProfile" exact>
-              <MyProfile />
-            </Route>
-          </>
-        )}
+      <Switch>
+{isAuthenticated ? (
+  <>
+  </>
+)}
+        <Route exact path="/">
+          {user ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route exact path="/register">
+          {!user ? <Register /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/login">
+          {!user ? <Login /> : <Redirect to="/" />}
+        </Route>
+
+        <Route path="/movies" exact>
+          <Home type="/movies" />
+        </Route>
+        <Route path="/series" exact>
+          <Home type="/series" />
+        </Route>
+        <Route path="/contactUs" exact>
+          <ContactUs />
+        </Route>
+        <Route path="/dashboard" exact>
+          <Dashboard />
+        </Route>
+        <Route exact path="/dashboard/users" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/user/:userId" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/newUser" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/movies" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/listList" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/addMovie" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/addUser" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/movie/:moveiId" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/newMovie" exact>
+          <Dashboard />
+        </Route>
+        <Route path="/watchPage" exact>
+          <WatchPage />
+        </Route>
+        <Route path="/myProfile" exact>
+          <MyProfile />
+        </Route>
+
         <Route path="*">We have no such page like this</Route>
       </Switch>
+
     </Router>
   );
 }

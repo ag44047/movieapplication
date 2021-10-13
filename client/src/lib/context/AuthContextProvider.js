@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import * as API from "../../api/user/user";
-import { useHistory } from "react-router";
 
 export function AuthContextProvider(props) {
   const [user, setUser] = useState(undefined);
@@ -10,41 +9,21 @@ export function AuthContextProvider(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    reloadAuthentication();
+    (async () => {
+      await reloadAuthentication();
+    })();
   }, []);
 
-  const reloadAuthentication = async () => {
-    try {
-      setIsLoading(true);
-      const loggedUser = localStorage.getItem("user");
+  const reloadAuthentication = () => {
+    setIsLoading(true);
+    const loggedUser = localStorage.getItem("user");
+    const userObj = JSON.parse(loggedUser);
+    setIsLoading(false);
+    if (!loggedUser) return;
+    setUser({ ...userObj });
+    setIsAuthenticated(true);
 
-      if (!loggedUser) return;
-
-      const userObj = JSON.parse(loggedUser);
-      console.log("userjjjobj", userObj.id);
-
-      // const userDetails = await API.getUserById(userObj.id);
-      // const userDetails = await API.getUserById(
-      //   "62c6671c-3520-450a-90f0-de241f01522e"
-      // );
-      // const userDetails = "";
-
-      const userDetails = await API.getCurrentUser();
-
-      console.log("user details", userDetails);
-      const userData = await userDetails.data;
-      setUser({ ...userData });
-      console.log("userdata", userData);
-
-      console.log(userDetails.status);
-      if (userDetails.status === 200) {
-        setIsAuthenticated(true);
-      }
-    } catch (error) {
-      console.error(error.toString());
-    } finally {
-      setIsLoading(false);
-    }
+    console.error(error.toString());
   };
 
   const login = async (email, password) => {
