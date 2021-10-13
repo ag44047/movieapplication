@@ -4,6 +4,7 @@
   background-color: white;
   /* position: sticky; */
   top: 50px;
+  max-width: 300px !important;
 }
 
 .sidebarWrapper {

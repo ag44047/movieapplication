@@ -4,14 +4,22 @@ import { EditContext } from "./EditContext";
 export function EditContextProvider(props) {
   const [user, setUser] = useState(undefined);
   const [movies, setMovies] = useState(undefined);
+  const [movie, setMovie] = useState(undefined);
+  const [list, setList] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEditUser = (user) => {
     setUser({ ...user });
   };
-  const handleEditMovie = (movie) => {
+  const handleEditMovies = (movie) => {
     setMovies({ ...movie });
+  };
+  const handleEditMovie = (movie) => {
+    setMovie({ ...movie });
+  };
+  const handleEditList = (list) => {
+    setList({ ...list });
   };
 
   const values = {
@@ -19,8 +27,12 @@ export function EditContextProvider(props) {
     error: error,
     isLoading: isLoading,
     movies: movies,
+    movie: movie,
+    handleEditMovies,
     handleEditUser,
     handleEditMovie,
+    list,
+    handleEditList,
   };
 
   return (

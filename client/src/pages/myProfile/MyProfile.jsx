@@ -1,6 +1,6 @@
-import React from 'react-dom';
-import Navbar from '../../components/navbar/Navbar';
-import './myProfile.scss';
+import React from "react-dom";
+import Navbar from "../../components/navbar/Navbar";
+import "./myProfile.scss";
 import { useState } from "react";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import PhoneAndroid from "@material-ui/icons/PhoneAndroid";
@@ -12,8 +12,8 @@ import { useEditContext } from "../../lib/edit/EditContext";
 import { Link } from "react-router-dom";
 import * as API from "../../api/user/user";
 
-export default function MyProfile(){
-    const { user } = useEditContext();
+export default function MyProfile() {
+  const { user } = useEditContext();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
@@ -41,10 +41,10 @@ export default function MyProfile(){
       setIsLoading(false);
     }
   };
-    return(
-        <div className="myProfile">
-            <Navbar/>
-            <div className="userTitleContainer">
+  return (
+    <div className="myProfile">
+      <Navbar />
+      <div className="userTitleContainer">
         <h1 className="userTitle">My Profile</h1>
       </div>
       <div className="userContainer">
@@ -63,18 +63,24 @@ export default function MyProfile(){
             <span className="userShowTitle">Profile Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle"><b>Username:</b> Doruntina Korca</span>
+              <span className="userShowInfoTitle">
+                <b>Username:</b> Doruntina Korca
+              </span>
             </div>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle"><b>DisplayName:</b> Doruntina Korca</span>
+              <span className="userShowInfoTitle">
+                <b>DisplayName:</b> Doruntina Korca
+              </span>
             </div>
-           
+
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle"><b>Email:</b> dk40651@ubt-uni.net</span>
+              <span className="userShowInfoTitle">
+                <b>Email:</b> dk40651@ubt-uni.net
+              </span>
             </div>
-           
+
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
               <span className="userShowInfoTitle">Kosove | Gjilan</span>
@@ -122,7 +128,6 @@ export default function MyProfile(){
                   value={userEdit.email}
                 />
               </div>
-              
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
@@ -143,6 +148,6 @@ export default function MyProfile(){
           </form>
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 }

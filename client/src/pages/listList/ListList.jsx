@@ -5,11 +5,13 @@ import { DeleteOutline } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import * as API from "../../api/movies/movie";
+import { useEditContext } from "../../lib/edit/EditContext";
 
 export default function MovieList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
+  const { list, handleEditList } = useEditContext();
 
   const fetchData = async () => {
     setLoading(true);
@@ -29,6 +31,12 @@ export default function MovieList() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleClick = (id) => {
+    const listToEdit = data.find((list) => list.id === id);
+    handleEditList({ ...listToEdit });
+    console.log(listToEdit);
   };
 
   useEffect(() => {
@@ -68,7 +76,12 @@ export default function MovieList() {
         return (
           <>
             <Link to={"/dashboard/listtt/" + params.row.id}>
-              <button className="productListEdit">Edit</button>
+              <button
+                className="productListEdit"
+                onClick={() => handleClick(params.row.id)}
+              >
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="productListDelete"

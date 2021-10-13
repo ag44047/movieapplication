@@ -7,7 +7,11 @@ export const login = async (email, password) =>
 export const register = async (user) =>
   API.requests.post("/Account/register", user);
 
-export const getUserById = async (id) => API.requests.get(`/Account/${id}`);
+export const getUserById = async (id) =>
+  await API.requests.get(`/Account/${id}`);
+
+export const getCurrentUser = async () =>
+  await API.requests.get(`/Account/currentuser`);
 
 export const getUsers = async () => API.requests.get("/Account");
 
@@ -16,7 +20,8 @@ export const deleteUser = async (id) => API.requests.del(`/Account/${id}`);
 export const editUser = async (id, user) =>
   API.requests.put(`/Account/${id}`, user);
 
-export const refreshToken = async (user) => API.requests.post('/account/refreshToken', {});
+export const refreshToken = async (user) =>
+  API.requests.post("/Account/refreshToken", {});
 
 ////////dddd
 // export const verifyEmail = async (token, email)=>

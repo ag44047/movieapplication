@@ -7,6 +7,7 @@ const initialState = {
   reloadAuthentication: () => {},
   login: () => {},
   logout: () => {},
+  isAuthenticated: false,
 };
 
 export const AuthContext = createContext(initialState);

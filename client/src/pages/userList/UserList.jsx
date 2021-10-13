@@ -6,6 +6,7 @@ import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import * as API from "../../api/user/user";
 import { useEditContext } from "../../lib/edit/EditContext";
+import { Snackbar } from "@material-ui/core";
 
 export default function UserList() {
   const [data, setData] = useState(userRows);
@@ -48,10 +49,10 @@ export default function UserList() {
     }
   };
 
-  const handleClick = (id) => {
+  const handleEdit = async (id) => {
     const selectedForEdit = data.find((el) => el.id === id);
+    if (!selectedForEdit) return;
     handleEditUser({ ...selectedForEdit });
-    console.log(selectedForEdit);
   };
 
   useEffect(() => {
@@ -85,7 +86,7 @@ export default function UserList() {
             <Link to={"/dashboard/user/" + params.row.id}>
               <button
                 className="userListEdit"
-                onClick={() => handleClick(params.row.id)}
+                onClick={() => handleEdit(params.row.id)}
               >
                 Edit
               </button>

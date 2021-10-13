@@ -5,11 +5,21 @@ import { DeleteOutline } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import * as API from "../../api/movies/movie";
+import { useEditContext } from "../../lib/edit/EditContext";
+import { toast } from "react-toastify";
 
 export default function MovieList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
+  const { handleEditMovie } = useEditContext();
+
+  const handleClick = (id) => {
+    const selectedForEdit = data.find((el) => el.id === id);
+    if (!selectedForEdit) return;
+    handleEditMovie({ ...selectedForEdit });
+    console.log(data);
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -33,8 +43,25 @@ export default function MovieList() {
     fetchData();
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     setData(data.filter((item) => item.id !== id));
+    try {
+      const res = await API.deleteMovie(id);
+
+      if (res.status === 200) {
+        toast.success("Movie deleted successfully.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error(error.toString());
+    }
   };
 
   const columns = [
@@ -81,7 +108,12 @@ export default function MovieList() {
         return (
           <>
             <Link to={"/dashboard/movie/" + params.row.id}>
-              <button className="productListEdit">Edit</button>
+              <button
+                className="productListEdit"
+                onClick={() => handleClick(params.row.id)}
+              >
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="productListDelete"

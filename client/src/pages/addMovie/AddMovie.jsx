@@ -1,6 +1,7 @@
 import "./addMovie.css";
 import { useState } from "react";
 import * as API from "../../api/movies/movie";
+import { toast } from "react-toastify";
 
 export default function AddMovie() {
   const [movie, setMovie] = useState({
@@ -24,19 +25,28 @@ export default function AddMovie() {
   //   const [video, setVideo] = useState(null);
 
   const handleChange = (e) => {
-    const value = e.target.value;
     setMovie({ ...movie, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    // const value = e.target.value;
-    // setMovie({ ...movie, [e.target.name]: value });
     e.preventDefault();
-    console.log("movie:  ", movie);
-    const res = await API.addMovie(movie);
-    // const data = await res.data;
+    try {
+      const res = await API.addMovie(movie);
 
-    console.log(res);
+      if (res.status === 200) {
+        toast.success("Movie added successfully.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error(error.toString());
+    }
   };
 
   return (

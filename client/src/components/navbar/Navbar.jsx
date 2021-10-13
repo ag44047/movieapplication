@@ -37,10 +37,11 @@ const Navbar = () => {
           <Link to="/contactUs" className="link">
             <span>Contact Us</span>
           </Link>
-          <Link to="/dashboard" className="link">
-            <span>Dashboard</span>
-          </Link>
-          
+          {user.isAdmin ? (
+            <Link to="/dashboard" className="link">
+              <span>Dashboard</span>
+            </Link>
+          ) : null}
         </div>
         <div className="right">
           {user && (
@@ -51,9 +52,9 @@ const Navbar = () => {
               <div className="profile">
                 <ArrowDropDownIcon className="icon" />
                 <div className="options">
-                <Link to="/myProfile" className="link">
-            <span>My Profile</span>
-          </Link>
+                  <Link to="/myProfile" className="link">
+                    <span>My Profile</span>
+                  </Link>
                   <span
                     onClick={() => {
                       history.push("/login");

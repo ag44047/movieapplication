@@ -7,6 +7,7 @@ export function AuthContextProvider(props) {
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     reloadAuthentication();
@@ -15,20 +16,32 @@ export function AuthContextProvider(props) {
   const reloadAuthentication = async () => {
     try {
       setIsLoading(true);
-      const user = localStorage.getItem("user");
+      const loggedUser = localStorage.getItem("user");
 
-      if (!user) return;
+      if (!loggedUser) return;
 
-      const userObj = JSON.parse(user);
+      const userObj = JSON.parse(loggedUser);
+      console.log("userjjjobj", userObj.id);
 
-      const userDetails = await API.getUserById(userObj.id);
+      // const userDetails = await API.getUserById(userObj.id);
+      // const userDetails = await API.getUserById(
+      //   "62c6671c-3520-450a-90f0-de241f01522e"
+      // );
+      // const userDetails = "";
+
+      const userDetails = await API.getCurrentUser();
+
+      console.log("user details", userDetails);
       const userData = await userDetails.data;
       setUser({ ...userData });
+      console.log("userdata", userData);
+
+      console.log(userDetails.status);
+      if (userDetails.status === 200) {
+        setIsAuthenticated(true);
+      }
     } catch (error) {
-      setError(
-        "Something wrong happened in realoadauthentication method",
-        error
-      );
+      console.error(error.toString());
     } finally {
       setIsLoading(false);
     }
@@ -46,10 +59,7 @@ export function AuthContextProvider(props) {
 
       setUser({ ...data });
     } catch (err) {
-      throw new Error(
-        "Something wrong happened while logging in! ",
-        err.message
-      );
+      console.error(err.toString());
     } finally {
       setIsLoading(false);
     }
@@ -68,6 +78,7 @@ export function AuthContextProvider(props) {
     reloadAuthentication,
     login,
     logout,
+    isAuthenticated,
   };
 
   return (

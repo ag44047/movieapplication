@@ -16,67 +16,80 @@ import ContactUs from "./pages/contactUs/ContactUs";
 import MyProfile from "./pages/myProfile/MyProfile";
 import { useAuthContext } from "./lib/context/AuthContext";
 import MovieList from "./pages/movieList/MovieList";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const { user, isLoading } = useAuthContext();
+  const { user, isLoading, isAuthenticated } = useAuthContext();
+  if (isLoading) return <h6>Loading... please wait!</h6>;
+
+  console.log(user);
+  console.log("i", isAuthenticated);
+
   return (
     <Router>
+      <ToastContainer />
       <Switch>
-        <Route exact path="/">
-          {user ? <Home /> : <Redirect to="/login" />}
-        </Route>
-        <Route exact path="/register">
-          {!user ? <Register /> : <Redirect to="/" />}
-        </Route>
-        <Route exact path="/login">
-          {!user ? <Login /> : <Redirect to="/" />}
-        </Route>
-
-        {user && (
+        {!isAuthenticated && (
           <>
-            <Route path="/movies">
+            <Route exact path="/">
+              {user ? <Home /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/register">
+              {!user ? <Register /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path="/login">
+              {!user ? <Login /> : <Redirect to="/" />}
+            </Route>
+          </>
+        )}
+
+        {isAuthenticated && (
+          <>
+            <Route path="/movies" exact>
               <Home type="/movies" />
             </Route>
-            <Route path="/series">
+            <Route path="/series" exact>
               <Home type="/series" />
             </Route>
-            <Route path="/contactUs">
-            <ContactUs/>
+            <Route path="/contactUs" exact>
+              <ContactUs />
             </Route>
-            <Route path="/dashboard">
+            <Route path="/dashboard" exact>
               <Dashboard />
             </Route>
-            <Route exact path="/dashboard/users">
+            <Route exact path="/dashboard/users" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/user/:userId">
+            <Route path="/dashboard/user/:userId" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/newUser">
+            <Route path="/dashboard/newUser" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/movies">
+            <Route path="/dashboard/movies" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/listList">
+            <Route path="/dashboard/listList" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/addMovie">
+            <Route path="/dashboard/addMovie" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/addUser">
+            <Route path="/dashboard/addUser" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/movie/:moveiId">
+            <Route path="/dashboard/movie/:moveiId" exact>
               <Dashboard />
             </Route>
-            <Route path="/dashboard/newMovie">
+            <Route path="/dashboard/newMovie" exact>
               <Dashboard />
             </Route>
-            <Route path="/watchPage">
+            <Route path="/watchPage" exact>
               <WatchPage />
             </Route>
-            <Route path="/myProfile">
+            <Route path="/myProfile" exact>
               <MyProfile />
             </Route>
           </>

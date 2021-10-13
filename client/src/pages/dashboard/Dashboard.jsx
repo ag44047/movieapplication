@@ -15,6 +15,7 @@ import AddList from "../addList/AddList";
 import ListList from "../listList/ListList";
 import List from "./../../components/list/List";
 import Listtt from "./../listtt/Listtt";
+import MyProfile from "../../pages/myProfile/MyProfile";
 
 export default function Dashboard() {
   return (
@@ -55,6 +56,9 @@ export default function Dashboard() {
           </Route>
           <Route path="/dashboard/listtt/:listttId">
             <Listtt />
+          </Route>
+          <Route path="/myProfile">
+            <MyProfile />
           </Route>
         </Switch>
       </div>

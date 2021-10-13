@@ -61,8 +61,14 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(string id)
-        {
-            return await _userManager.FindByIdAsync(id);
+         {
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
         }
 
 

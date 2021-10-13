@@ -9,6 +9,8 @@ import LocationSearching from "@material-ui/icons/LocationSearching";
 import { useEditContext } from "../../lib/edit/EditContext";
 import { Link } from "react-router-dom";
 import * as API from "../../api/user/user";
+import { Snackbar } from "@material-ui/core";
+import { toast } from "react-toastify";
 
 export default function User() {
   const { user } = useEditContext();
@@ -22,6 +24,22 @@ export default function User() {
     phoneNumber: user?.phoneNumber,
   });
 
+  const [state, setState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClickMessage = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -30,8 +48,17 @@ export default function User() {
       const res = await API.editUser(user.id, userEdit);
 
       console.log(res);
+      console.log("status", res.status);
       if (res.status === 200) {
-        setMessage("User edited successfully.");
+        toast.success("User edited successfully.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (err) {
       setError(err);
@@ -42,6 +69,13 @@ export default function User() {
 
   return (
     <div className="user">
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="User updated successfully."
+        key={vertical + horizontal}
+      />
       <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
       </div>

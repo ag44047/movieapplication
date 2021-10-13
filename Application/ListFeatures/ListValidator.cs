@@ -19,7 +19,7 @@ namespace Application.ListFeatures
 
             RuleFor(x => x.listType).NotEmpty().WithMessage("List type can't be empty!");
             RuleFor(x => x.listGenre).NotEmpty().WithMessage("List genre can't be empty!");
-            RuleFor(x => x.content).NotEmpty();
+            //RuleFor(x => x.content).NotEmpty();
         }
     }
 }
